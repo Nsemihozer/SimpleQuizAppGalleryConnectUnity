@@ -11,3 +11,5 @@ Assets/Plugins/*
 */*.apk
 */*.keystore
 */.idea/*
+*.rar
+*.json

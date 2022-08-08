@@ -1,0 +1,9 @@
+<linker>
+    <assembly fullname="AgconnectApi" />
+    <assembly fullname="AgconnectAuth" />
+    <assembly fullname="AgconnectDataStore" />
+    <assembly fullname="AgconnectCommon" />
+    <assembly fullname="AgconnectCredential" />
+    <assembly fullname="AgconnectHttps"/>
+    <assembly fullname="NLog"/>
+</linker>

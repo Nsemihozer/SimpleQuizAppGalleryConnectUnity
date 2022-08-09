@@ -6,6 +6,7 @@ using Huawei.Agconnect;
 using Huawei.Agconnect.AGCException;
 using Huawei.Agconnect.Auth;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class AuthManager : MonoBehaviour
 {
@@ -33,6 +34,11 @@ public class AuthManager : MonoBehaviour
 
                 Debug.LogException(ex);
             }
+
+            if (AGConnectAuth.Instance.GetCurrentUser() != null)
+            {
+                SceneManager.LoadScene("MainMenu");
+            }
         }
     }
 
@@ -56,6 +62,26 @@ public class AuthManager : MonoBehaviour
             else
                 Debug.Log(verifyCodeResultTask.Exception.InnerException.ToString());
         }
+    }
+
+    public async void SignAnon()
+    {
+        Task<ISignInResult> signInTask = AGConnectAuth.Instance.SignInAnonymouslyAsync();
+        try
+        {
+            await signInTask;
+            ISignInResult signInResult = signInTask.Result;
+            SceneManager.LoadScene("MainMenu");
+        }
+        catch (System.Exception ex)
+        {
+            if (signInTask.Exception.InnerException is AGCException exception)
+                Debug.Log(exception.ErrorMessage);
+            else
+                Debug.Log(signInTask.Exception.InnerException.ToString());
+        }
+
+        
     }
 
     public async void RegisterUser(string email, string verifycode, string password)
@@ -93,6 +119,7 @@ public class AuthManager : MonoBehaviour
                 await signInTask;
                 ISignInResult signInResult = signInTask.Result;
                 user = AGConnectAuth.Instance.GetCurrentUser();
+                SceneManager.LoadScene("MainMenu");
             }
             catch (System.Exception ex)
             {
@@ -104,9 +131,9 @@ public class AuthManager : MonoBehaviour
         }
     }
 
-    // Update is called once per frame
-    void Update()
+    public void Logout()
     {
-        
+        AGConnectAuth.Instance.SignOut();
     }
+    
 }

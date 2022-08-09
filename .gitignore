@@ -1,7 +1,11 @@
 */Library/*
+Library/*
 */Temp/*
+Temp/*
 */Logs/*
+Logs/*
 */obj/*
+obj/*
 Packages/*
 */ProjectSettings/*
 Assets/ExternalDependencyManager/*
@@ -11,5 +15,6 @@ Assets/Plugins/*
 */*.apk
 */*.keystore
 */.idea/*
+.idea/*
 *.rar
 *.json

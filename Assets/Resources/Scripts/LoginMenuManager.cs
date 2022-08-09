@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class MenuManager : MonoBehaviour
+public class LoginMenuManager : MonoBehaviour
 {
     public Text verifyCodeText, emailText, passwordText;
     public Text  emailSignInText, passwordSignInText;
+    
     
     public void ActivatePanel(GameObject gameObject)
     {
@@ -31,6 +32,15 @@ public class MenuManager : MonoBehaviour
     public void SignIn()
     {
         AuthManager._instance.SignInEmail(emailSignInText.text,passwordSignInText.text);
+    }
+    public void SignInAnon()
+    {
+        AuthManager._instance.SignAnon();
+    }
+
+    public void SignOut()
+    {
+        AuthManager._instance.Logout();
     }
     
 }

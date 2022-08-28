@@ -121,7 +121,7 @@ public class AuthManager : MonoBehaviour
                 user = AGConnectAuth.Instance.GetCurrentUser();
                 SceneManager.LoadScene("MainMenu");
             }
-            catch (System.Exception ex)
+            catch (System.Exception)
             {
                 if (signInTask.Exception.InnerException is AGCException exception)
                     Debug.Log(exception.ErrorMessage);

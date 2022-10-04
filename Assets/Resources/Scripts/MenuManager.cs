@@ -21,6 +21,7 @@ public class MenuManager : MonoBehaviour
     public void SetCategory(string category)
     {
         PlayerPrefs.SetString("category",category);
+        PlayerPrefs.Save();
     }
     
 }

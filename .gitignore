@@ -20,3 +20,4 @@ Assets/Plugins/*
 *.json
 *.csproj
 */*.csproj
+Assembly-CSharp.csproj

@@ -54,8 +54,8 @@
   <ItemGroup>
      <Compile Include="Assets\Resources\Scripts\LoginMenuManager.cs" />
      <Compile Include="Assets\Resources\Scripts\AuthManager.cs" />
-     <Compile Include="Assets\Resources\Scripts\MenuManager.cs" />
      <Compile Include="Assets\Resources\Scripts\GameManager.cs" />
+     <Compile Include="Assets\Resources\Scripts\MenuManager.cs" />
      <Compile Include="Assets\Resources\Scripts\Model\Question.cs" />
      <None Include="Assets\Resources\agc\link.xml" />
  <Reference Include="UnityEngine">
@@ -280,6 +280,9 @@
  <Reference Include="UnityEditor.UnityConnectModule">
  <HintPath>C:/Program Files/Unity/Hub/Editor/2020.3.29f1/Editor/Data/Managed/UnityEngine/UnityEditor.UnityConnectModule.dll</HintPath>
  </Reference>
+ <Reference Include="Newtonsoft.Json">
+ <HintPath>C:/Users/Semih/Desktop/blog/unity/SimpleQuizApp/Library/PackageCache/com.unity.nuget.newtonsoft-json@3.0.2/Runtime/Newtonsoft.Json.dll</HintPath>
+ </Reference>
  <Reference Include="AgconnectCommon">
  <HintPath>C:/Users/Semih/Desktop/blog/unity/SimpleQuizApp/Assets/Resources/agc/AgconnectCommon.dll</HintPath>
  </Reference>
@@ -288,6 +291,9 @@
  </Reference>
  <Reference Include="AgconnectApi">
  <HintPath>C:/Users/Semih/Desktop/blog/unity/SimpleQuizApp/Assets/Resources/agc/AgconnectApi.dll</HintPath>
+ </Reference>
+ <Reference Include="DOTween">
+ <HintPath>C:/Users/Semih/Desktop/blog/unity/SimpleQuizApp/Assets/Plugins/Demigiant/DOTween/DOTween.dll</HintPath>
  </Reference>
  <Reference Include="AgconnectHttps">
  <HintPath>C:/Users/Semih/Desktop/blog/unity/SimpleQuizApp/Assets/Resources/agc/AgconnectHttps.dll</HintPath>
@@ -300,9 +306,6 @@
  </Reference>
  <Reference Include="AgconnectDataStore">
  <HintPath>C:/Users/Semih/Desktop/blog/unity/SimpleQuizApp/Assets/Resources/agc/AgconnectDataStore.dll</HintPath>
- </Reference>
- <Reference Include="Newtonsoft.Json">
- <HintPath>C:/Users/Semih/Desktop/blog/unity/SimpleQuizApp/Library/PackageCache/com.unity.nuget.newtonsoft-json@3.0.2/Runtime/Newtonsoft.Json.dll</HintPath>
  </Reference>
  <Reference Include="UnityEditor.iOS.Extensions.Xcode">
  <HintPath>C:/Program Files/Unity/Hub/Editor/2020.3.29f1/Editor/Data/PlaybackEngines/iOSSupport/UnityEditor.iOS.Extensions.Xcode.dll</HintPath>
@@ -759,6 +762,10 @@
  </Reference>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="Assembly-CSharp-firstpass.csproj">
+      <Project>{9657026a-4016-3753-5521-466215eb1d77}</Project>
+      <Name>Assembly-CSharp-firstpass</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.

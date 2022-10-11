@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using DG.Tweening;
 using Newtonsoft.Json;
 using UnityEngine;
 using UnityEngine.Networking;
@@ -16,11 +17,13 @@ public class GameManager : MonoBehaviour
     private int _questionIndex = 0;
     private string _category;
     private List<Question> _questions = new List<Question>();
+    private int _score=0;
 
     void Start()
     {
         _category = PlayerPrefs.GetString("category");
         StartCoroutine(GetQuestions());
+        _score=0;
     }
 
     private void Update()
@@ -57,7 +60,7 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public static void Shuffle(List<string> list)
+    private static void Shuffle(List<string> list)
     {
         System.Random rng = new System.Random();
         int n = list.Count;
@@ -82,17 +85,25 @@ public class GameManager : MonoBehaviour
         D.text = answers[3];
     }
 
-    public void Answer(Text answer)
+    public void Answer(GameObject clicked)
     {
-        if (answer.text.Equals(_questions[_questionIndex].correctAnswer))
+        if (clicked.transform.GetChild(0).GetComponent<Text>().text.Equals(_questions[_questionIndex].correctAnswer))
         {
-            Debug.Log("Doğru");
+            _score += 10;
+            clicked.GetComponent<Image>().color=Color.green;
         }
         else
         {
-            Debug.Log("Yanlış");
+            clicked.GetComponent<Image>().color=Color.red;
         }
+        
+        StartCoroutine(NextQuestion(clicked));
+    }
 
+    IEnumerator NextQuestion(GameObject clicked)
+    {
+        yield return new WaitForSeconds(0.5f);
+        clicked.GetComponent<Image>().color=Color.white;
         _questionIndex++;
         SetQuestion();
     }

@@ -24,6 +24,7 @@ public class GameManager : MonoBehaviour
         _category = PlayerPrefs.GetString("category");
         StartCoroutine(GetQuestions());
         _score=0;
+        throw new NullReferenceException();
     }
 
     private void Update()

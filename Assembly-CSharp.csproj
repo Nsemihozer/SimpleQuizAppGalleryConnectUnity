@@ -55,6 +55,7 @@
      <Compile Include="Assets\Resources\Scripts\LoginMenuManager.cs" />
      <Compile Include="Assets\Resources\Scripts\AuthManager.cs" />
      <Compile Include="Assets\Resources\Scripts\GameManager.cs" />
+     <Compile Include="Assets\Resources\Scripts\CrashHandler.cs" />
      <Compile Include="Assets\Resources\Scripts\MenuManager.cs" />
      <Compile Include="Assets\Resources\Scripts\Model\Question.cs" />
      <None Include="Assets\Resources\agc\link.xml" />
@@ -285,6 +286,9 @@
  </Reference>
  <Reference Include="AgconnectCommon">
  <HintPath>C:/Users/Semih/Desktop/blog/unity/SimpleQuizApp/Assets/Resources/agc/AgconnectCommon.dll</HintPath>
+ </Reference>
+ <Reference Include="UnityTest">
+ <HintPath>C:/Users/Semih/Desktop/blog/unity/SimpleQuizApp/Assets/Resources/UnityTest.dll</HintPath>
  </Reference>
  <Reference Include="AgconnectCredential">
  <HintPath>C:/Users/Semih/Desktop/blog/unity/SimpleQuizApp/Assets/Resources/agc/AgconnectCredential.dll</HintPath>

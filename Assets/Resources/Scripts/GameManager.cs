@@ -1,7 +1,8 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using DG.Tweening;
+using Huawei.Agconnect.Auth;
+//using DG.Tweening;
 using Newtonsoft.Json;
 using UnityEngine;
 using UnityEngine.Networking;
@@ -11,8 +12,8 @@ public class GameManager : MonoBehaviour
 {
     // Start is called before the first frame update
 
-    [SerializeField] private Text questionText, A, B, C, D,Loading;
-    [SerializeField] private GameObject answersGameObject;
+    [SerializeField] private Text questionText, A, B, C, D,Loading,ScoreText;
+    [SerializeField] private GameObject answersGameObject,gameOverPanel;
 
     private int _questionIndex = 0;
     private string _category;
@@ -21,32 +22,18 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
+        
         _category = PlayerPrefs.GetString("category");
         StartCoroutine(GetQuestions());
         _score=0;
-        throw new NullReferenceException();
     }
 
-    private void Update()
-    {
-        if (_questions.Count >0)
-        {
-            Loading.gameObject.SetActive(false);
-            answersGameObject.SetActive(true);
-            questionText.gameObject.SetActive(true);
-        }
-        else
-        {
-            Loading.gameObject.SetActive(true);
-            answersGameObject.SetActive(false);
-            questionText.gameObject.SetActive(false);
-        }
-    }
+    
 
     IEnumerator GetQuestions()
     {
         UnityWebRequest www =
-            UnityWebRequest.Get($"https://the-trivia-api.com/api/questions?categories={_category}&limit=20");
+            UnityWebRequest.Get($"https://the-trivia-api.com/api/questions?categories={_category}&limit=5");
         yield return www.SendWebRequest();
 
         if (www.result != UnityWebRequest.Result.Success)
@@ -56,6 +43,9 @@ public class GameManager : MonoBehaviour
         else
         {
             // Show results as text
+            Loading.gameObject.SetActive(false);
+            answersGameObject.SetActive(true);
+            questionText.gameObject.SetActive(true);
             _questions = JsonConvert.DeserializeObject<List<Question>>(www.downloadHandler.text);
             SetQuestion();
         }
@@ -73,21 +63,42 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    private void SetQuestion()
+    private async void SetQuestion()
     {
-        questionText.text = _questions[_questionIndex].question;
-        List<string> answers = new List<string>();
-        answers.Add(_questions[_questionIndex].correctAnswer);
-        answers.AddRange(_questions[_questionIndex].incorrectAnswers);
-        Shuffle(answers);
-        A.text = answers[0];
-        B.text = answers[1];
-        C.text = answers[2];
-        D.text = answers[3];
+        if (_questionIndex==_questions.Count)
+        {
+            GameScore score = new GameScore
+            {
+                category = _category,
+                score = _score,
+                userid = AGConnectAuth.Instance.GetCurrentUser().GetUid()
+            };
+
+            await DBManager._instance.ExecuteUpsert(score);
+            ScoreText.text += " " + _score;
+            answersGameObject.SetActive(false);
+            questionText.gameObject.SetActive(false);
+            gameOverPanel.SetActive(true);
+            
+        }
+        else
+        {
+            questionText.text = _questions[_questionIndex].question;
+            List<string> answers = new List<string>();
+            answers.Add(_questions[_questionIndex].correctAnswer);
+            answers.AddRange(_questions[_questionIndex].incorrectAnswers);
+            Shuffle(answers);
+            A.text = answers[0];
+            B.text = answers[1];
+            C.text = answers[2];
+            D.text = answers[3];
+        }
+      
     }
 
     public void Answer(GameObject clicked)
     {
+      
         if (clicked.transform.GetChild(0).GetComponent<Text>().text.Equals(_questions[_questionIndex].correctAnswer))
         {
             _score += 10;
@@ -97,8 +108,8 @@ public class GameManager : MonoBehaviour
         {
             clicked.GetComponent<Image>().color=Color.red;
         }
-        
         StartCoroutine(NextQuestion(clicked));
+ 
     }
 
     IEnumerator NextQuestion(GameObject clicked)

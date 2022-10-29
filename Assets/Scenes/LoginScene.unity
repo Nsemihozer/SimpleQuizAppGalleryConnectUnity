@@ -2235,7 +2235,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1013291735}
   - component: {fileID: 1013291734}
-  - component: {fileID: 1013291736}
   m_Layer: 0
   m_Name: AGC
   m_TagString: Untagged
@@ -2269,20 +2268,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1013291736
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1013291733}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: -2055116926, guid: 3bece57e3952a1a4191400152cb1f2c9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  output: 
-  stack: 
 --- !u!1 &1076063056
 GameObject:
   m_ObjectHideFlags: 0
